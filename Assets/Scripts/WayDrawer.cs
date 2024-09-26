@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WayDrawer : MonoBehaviour
 {
@@ -8,12 +9,15 @@ public class WayDrawer : MonoBehaviour
     [SerializeField] private float _timeForNextRay = 0.05f, _pointThreshold = 0.1f;
     [SerializeField] private LayerMask _playerMask, _notDrawMask;
     [SerializeField] private PlayerMovement _playerMovement;
-    private int _wayIndex = 1;
+    [SerializeField] private float _wayLength = 100;
+    [SerializeField] private int _wayIndex = 1;
     private float _timer;
     private bool _clickOnPlayer;
     private List<Vector3> _positions;
+    
     public List<Vector3> Positions => _positions;
     public LineRenderer Line => _pathRenderer;
+    
     private void Start()
     {
         _positions = new List<Vector3>();
@@ -37,7 +41,7 @@ public class WayDrawer : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && _clickOnPlayer)
         {
-            if (_timer >= _timeForNextRay)
+            if (_timer >= _timeForNextRay && _wayIndex <= _wayLength)
             {
                 var mousePosition = Camera.main.ScreenToWorldPoint(
                     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
@@ -73,6 +77,10 @@ public class WayDrawer : MonoBehaviour
     {
         _pathRenderer.SetPositions(positions);
         _positions = positions.ToList();
+    }
+    public void SetWayLength(int length)
+    {
+        _wayLength = length;
     }
     public void ClearWayPoints()
     {
