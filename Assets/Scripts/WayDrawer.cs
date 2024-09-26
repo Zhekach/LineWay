@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class WayDrawer : MonoBehaviour
 {
@@ -9,8 +9,9 @@ public class WayDrawer : MonoBehaviour
     [SerializeField] private float _timeForNextRay = 0.05f, _pointThreshold = 0.1f;
     [SerializeField] private LayerMask _playerMask, _notDrawMask;
     [SerializeField] private PlayerMovement _playerMovement;
-    [SerializeField] private float _wayLength = 100;
-    [SerializeField] private int _wayIndex = 1;
+    [SerializeField] private float _wayMaxLength;
+    [SerializeField] private int _wayIndex;
+    [SerializeField] private TMP_Text _wayCounterText;
     private float _timer;
     private bool _clickOnPlayer;
     private List<Vector3> _positions;
@@ -22,7 +23,8 @@ public class WayDrawer : MonoBehaviour
     {
         _positions = new List<Vector3>();
         _pathRenderer.enabled = false;
-        _wayIndex = 1;
+        _wayIndex = 0;
+        UpdateWayCounter();
     }
     private void Update()
     {
@@ -41,7 +43,7 @@ public class WayDrawer : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && _clickOnPlayer)
         {
-            if (_timer >= _timeForNextRay && _wayIndex <= _wayLength)
+            if (_timer >= _timeForNextRay && _wayIndex <= _wayMaxLength - 1)
             {
                 var mousePosition = Camera.main.ScreenToWorldPoint(
                     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
@@ -58,6 +60,7 @@ public class WayDrawer : MonoBehaviour
                     _positions.Add(mousePosition);
                     _pathRenderer.SetPosition(_wayIndex, mousePosition);
                     _wayIndex++;
+                    UpdateWayCounter();
                 }
                 _timer = 0;
             }
@@ -80,10 +83,15 @@ public class WayDrawer : MonoBehaviour
     }
     public void SetWayLength(int length)
     {
-        _wayLength = length;
+        _wayMaxLength = length;
     }
     public void ClearWayPoints()
     {
         _positions.Clear();
+    }
+
+    private void UpdateWayCounter()
+    {
+        _wayCounterText.text = $"{_wayIndex}/{_wayMaxLength}";
     }
 }
