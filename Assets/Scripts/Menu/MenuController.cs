@@ -62,7 +62,8 @@ public class MenuController : MonoBehaviour
         BRespawn.SetActive(true);
         BMenu.SetActive(true);
         BNext.SetActive(true);
-        enemyFight.SaveToProgress();
+        //TODO Fix refaxtor
+        //enemyFight.SaveToProgress();
         for(int i = 0; i < score; i++)
         {
          Diamonds[i].SetActive(true);   

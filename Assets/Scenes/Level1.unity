@@ -567,6 +567,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8207686794697615946, guid: 3debab4b7435b3f4db42830b71bfa029, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -704,7 +708,6 @@ GameObject:
   - component: {fileID: 127549292}
   - component: {fileID: 127549291}
   - component: {fileID: 127549293}
-  - component: {fileID: 127549296}
   - component: {fileID: 127549297}
   m_Layer: 6
   m_Name: Player
@@ -858,29 +861,6 @@ MonoBehaviour:
   Move: 0
   _wayDrawer: {fileID: 59044227}
   _moveSpeed: 20
---- !u!114 &127549296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 127549288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2aed9be16f1f35418cd362bc3878792, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Respawn: {fileID: 522215471}
-  health: 2
-  healthText: {fileID: 1150036002}
-  coins: 0
-  coinsText: {fileID: 1564092164}
-  enemyHealth1: 1
-  enemyMoney1: 1
-  enemyHealth2: 2
-  enemyMoney2: 2
-  enemyHealth3: 3
-  enemyMoney3: 3
 --- !u!114 &127549297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1202,7 +1182,7 @@ Transform:
   m_GameObject: {fileID: 522215471}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.547, y: 3.155, z: 0}
+  m_LocalPosition: {x: -5.97, y: 3.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2188,7 +2168,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1090192973}
-  - component: {fileID: 1090192974}
   m_Layer: 5
   m_Name: UI Stats
   m_TagString: Untagged
@@ -2222,20 +2201,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1090192974
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090192972}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3602bab6569fc784487c0b95e485edb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scoreCount: 0
-  ScoreText: {fileID: 1120051876}
 --- !u!1 &1100619487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,7 +2773,7 @@ MonoBehaviour:
   - {fileID: 1806844261}
   - {fileID: 849066991}
   - {fileID: 573861949}
-  enemyFight: {fileID: 127549296}
+  enemyFight: {fileID: 0}
 --- !u!4 &1188062380
 Transform:
   m_ObjectHideFlags: 0
@@ -5344,6 +5309,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 8207686794697615946, guid: 3debab4b7435b3f4db42830b71bfa029, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7276,8 +7245,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
-  ScoreCounter: {fileID: 1090192974}
+  ScoreCounter: {fileID: 0}
   MenuController: {fileID: 1188062379}
+--- !u!1 &2015382834
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2015382837}
+  - component: {fileID: 2015382836}
+  - component: {fileID: 2015382835}
+  m_Layer: 0
+  m_Name: PlayerStats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2015382835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015382834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce64f0376e8d41ea980f86dcb065c4b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthCount: 3
+  HealthText: {fileID: 1150036002}
+--- !u!114 &2015382836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015382834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3602bab6569fc784487c0b95e485edb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreCount: 0
+  ScoreText: {fileID: 1120051876}
+--- !u!4 &2015382837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015382834}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.0479226, y: -2.9407644, z: -0.008014253}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2062118525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2543852210922320033, guid: 09f33427c99194b4589afcd203e334ea, type: 3}
@@ -7567,6 +7597,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4373105979781703384, guid: 1ad4f53d75457994eb0ba4f22394b08f, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6802375000607560837, guid: 1ad4f53d75457994eb0ba4f22394b08f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.50000006
@@ -7782,6 +7816,7 @@ SceneRoots:
   - {fileID: 125565110}
   - {fileID: 385195169}
   - {fileID: 127549290}
+  - {fileID: 2015382837}
   - {fileID: 59044226}
   - {fileID: 103440248}
   - {fileID: 1736539577}
