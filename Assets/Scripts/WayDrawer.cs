@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WayDrawer : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class WayDrawer : MonoBehaviour
     [SerializeField] private LayerMask _playerMask, _notDrawMask;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private float _wayMaxLength;
+    [SerializeField] private bool _isDrawn;
     [SerializeField] private int _wayIndex;
     [SerializeField] private TMP_Text _wayCounterText;
     private float _timer;
@@ -24,11 +26,12 @@ public class WayDrawer : MonoBehaviour
         _positions = new List<Vector3>();
         _pathRenderer.enabled = false;
         _wayIndex = 0;
+        _isDrawn = false;
         UpdateWayCounter();
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !_playerMovement.Move)
+        if (Input.GetMouseButtonDown(0) && !_playerMovement.Move && !_isDrawn)
         {
             var mousePosition = Camera.main.ScreenToWorldPoint(
                     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
@@ -36,6 +39,7 @@ public class WayDrawer : MonoBehaviour
             if (hit)
             {
                 _clickOnPlayer = true;
+                _isDrawn = true;
                 _pathRenderer.enabled = true;
                 _pathRenderer.positionCount = 1;
                 _pathRenderer.SetPosition(0, _playerMovement.transform.position);
