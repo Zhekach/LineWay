@@ -1,54 +1,91 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
-
+using UnityEngine.Serialization;
 
 public class MenuController : MonoBehaviour
 {
-  public Button[] LvlButtons;
-  public int lvlsUnlocked;
-  public TMP_Text coinText;
-  public void Start()
-  {
-    lvlsUnlocked = PlayerPrefs.GetInt("lvls", 1);
-
-    for (int i = 0; i < LvlButtons.Length; i++)
+    [SerializeField] private GameObject BCont;
+    [SerializeField] private GameObject BMenu;
+    [SerializeField] private GameObject BRespawn;
+    [SerializeField] private GameObject BNext;
+    [SerializeField] private GameObject[] Diamonds = new GameObject[3];
+    [SerializeField] private EnemyFight enemyFight;
+    
+    private void Start()
     {
-      LvlButtons[i].interactable = false;
+        BCont.SetActive(false);
+        BMenu.SetActive(false);
+        BRespawn.SetActive(false);
+        BNext.SetActive(false);
+        Diamonds[0].SetActive(false);
+        Diamonds[1].SetActive(false);
+        Diamonds[2].SetActive(false);
+    }
+
+    public void Pause()
+    {
+        BCont.SetActive(true);
+        BMenu.SetActive(true);
+        BRespawn.SetActive(false);
+        BNext.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+    public void Respawn()
+    {
+        BMenu.SetActive(false);
+        BRespawn.SetActive(false);
+        BNext.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
+
+    public void Continue()
+    {
+        BCont.SetActive(false);
+        BMenu.SetActive(false);
+        BNext.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void Dead()
+    {
+        BRespawn.SetActive(true);
+        BMenu.SetActive(true);
+        BNext.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+    public void Finish(int score)
+    {
+        GetComponentInParent<PlayerMovement>().StopMove();
+        BRespawn.SetActive(true);
+        BMenu.SetActive(true);
+        BNext.SetActive(true);
+        enemyFight.SaveToProgress();
+        for(int i = 0; i < score; i++)
+        {
+         Diamonds[i].SetActive(true);   
+        }
+        Time.timeScale = 0;
     }
     
-    for(int i = 0; i< lvlsUnlocked; i++)
+    public void Next()
     {
-      LvlButtons[i].interactable = true;
-      LvlButtons[i].GetComponent<lvlStars>().SetStars(PlayerPrefs.GetInt("lvlStars" + (i+1),0));
+        BCont.SetActive(false);
+        BMenu.SetActive(false);
+        BNext.SetActive(false);
+        SceneManager.LoadScene(2);
+        Time.timeScale = 1;
     }
-
-    coinText.text = PlayerPrefs.GetInt("coins", 0).ToString();
-  }
-  
-  public void Level1Load()
-  {
-    SceneManager.LoadScene(1);
-  }
-
-  public void Level2Load()
-  {
-    SceneManager.LoadScene(2);
-  }
-
-  public void ShopLoad()
-  {
-    SceneManager.LoadScene(3);
-  }
-
-  public void RefreshProgress()
-  {
-    PlayerPrefs.DeleteAll();
-    SceneManager.LoadScene(0);
-  }
+    
+    public void Menu()
+    {
+        BCont.SetActive(false);
+        BMenu.SetActive(false);
+        BRespawn.SetActive(false);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0);
+    }
+    
 }
