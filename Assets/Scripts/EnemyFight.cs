@@ -22,7 +22,7 @@ public class EnemyFight : MonoBehaviour
     {
         coins = PlayerPrefs.GetInt("coins",0);
         UpdateCoinsText();
-        UpdateHealthText(); // обновляем текстовый элемент при старте игры
+        UpdateHealthText(); // РѕР±РЅРѕРІР»СЏРµРј С‚РµРєСЃС‚РѕРІС‹Р№ СЌР»РµРјРµРЅС‚ РїСЂРё СЃС‚Р°СЂС‚Рµ РёРіСЂС‹
     }
 
       private void OnTriggerEnter2D(Collider2D collision)
@@ -57,7 +57,7 @@ public class EnemyFight : MonoBehaviour
         if (health <= 0)
         {
             GetComponentInParent<PlayerMovement>().StopMove();
-            GetComponentInChildren<ButtonController>().Dead();
+            GetComponentInChildren<MenuController>().Dead();
             gameObject.transform.position = Respawn.transform.position;
         }
         if (collision.CompareTag("Potion"))
@@ -71,11 +71,11 @@ public class EnemyFight : MonoBehaviour
 
     void UpdateHealthText()
     {
-        healthText.text = health.ToString(); // обновляем текстовый элемент с текущим количеством очков
+        healthText.text = health.ToString(); // РѕР±РЅРѕРІР»СЏРµРј С‚РµРєСЃС‚РѕРІС‹Р№ СЌР»РµРјРµРЅС‚ СЃ С‚РµРєСѓС‰РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РѕС‡РєРѕРІ
     }
     void UpdateCoinsText()
     {
-        coinsText.text = coins.ToString(); // обновляем текстовый элемент с текущим количеством очков
+        coinsText.text = coins.ToString(); // РѕР±РЅРѕРІР»СЏРµРј С‚РµРєСЃС‚РѕРІС‹Р№ СЌР»РµРјРµРЅС‚ СЃ С‚РµРєСѓС‰РёРј РєРѕР»РёС‡РµСЃС‚РІРѕРј РѕС‡РєРѕРІ
     }
 
     public void SaveToProgress()
