@@ -1,14 +1,18 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 
 namespace Stats
 {
     public class HealthCounter : MonoBehaviour
     {
-        [SerializeField] private int _healthCount = 3;
         public TMP_Text HealthText;
+        
+        [SerializeField] private int _healthCount = 3;
     
         public int HealthCount => _healthCount;
+
+        public static Action OnPlayerHealthDecreased;
 
         private void OnEnable()
         {
@@ -26,16 +30,29 @@ namespace Stats
         {
             UpdateText();
         }
-    
-        private void UpdateText()
-        {
-            HealthText.text = _healthCount.ToString();
-        }
 
         private void UpdateHealthCount(int healthDelta)
         {
-            _healthCount += healthDelta;
+            if (_healthCount + healthDelta > 0)
+            {
+                _healthCount += healthDelta;
+            }
+            else
+            {
+                _healthCount = 0;
+            }
+            
             UpdateText();
+
+            if (healthDelta < 0)
+            {
+                OnPlayerHealthDecreased?.Invoke();
+            }
+        }
+            
+        private void UpdateText()
+        {
+            HealthText.text = _healthCount.ToString();
         }
     }
 }

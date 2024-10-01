@@ -873,12 +873,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5090bc1bdc654646acf70ecc9360737, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 127549289}
   skins:
   - {fileID: -1425413264, guid: 8a8de0ad59435eb49b6d3a82086a2014, type: 3}
   - {fileID: -427979032, guid: 8a8de0ad59435eb49b6d3a82086a2014, type: 3}
   - {fileID: -1375882366, guid: 8a8de0ad59435eb49b6d3a82086a2014, type: 3}
   - {fileID: 218936596, guid: 8a8de0ad59435eb49b6d3a82086a2014, type: 3}
-  player: {fileID: 127549288}
 --- !u!1 &147521456
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,7 +2773,6 @@ MonoBehaviour:
   - {fileID: 1806844261}
   - {fileID: 849066991}
   - {fileID: 573861949}
-  enemyFight: {fileID: 0}
 --- !u!4 &1188062380
 Transform:
   m_ObjectHideFlags: 0
@@ -3096,6 +3095,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1757871736}
     m_Modifications:
+    - target: {fileID: 333092160254719628, guid: 681495ba1050b1440826598b07a36570, type: 3}
+      propertyPath: _healthDamage
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 1402553050452350520, guid: 681495ba1050b1440826598b07a36570, type: 3}
       propertyPath: m_Name
       value: Enemy (2)
@@ -5297,6 +5300,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7353868809418361598, guid: 3debab4b7435b3f4db42830b71bfa029, type: 3}
+      propertyPath: _healthDamage
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7597918692366390340, guid: 3debab4b7435b3f4db42830b71bfa029, type: 3}
       propertyPath: m_IsTrigger
       value: 1
@@ -7277,8 +7284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce64f0376e8d41ea980f86dcb065c4b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthCount: 3
+  MenuController: {fileID: 1188062379}
   HealthText: {fileID: 1150036002}
+  _healthCount: 3
 --- !u!114 &2015382836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7589,6 +7597,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1757871736}
     m_Modifications:
+    - target: {fileID: 4156123764981876521, guid: 1ad4f53d75457994eb0ba4f22394b08f, type: 3}
+      propertyPath: _healthDamage
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4373105979781703384, guid: 1ad4f53d75457994eb0ba4f22394b08f, type: 3}
       propertyPath: m_Name
       value: Enemy 3

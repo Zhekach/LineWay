@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerSkin : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     public Sprite[] skins;
 
-    public GameObject player;
     void Start()
     {
-        player.GetComponent<SpriteRenderer>().sprite = skins[PlayerPrefs.GetInt("skinNum", 0)];
+        _spriteRenderer.sprite = skins[PlayerPrefs.GetInt("skinNum", 0)];
     }
 }

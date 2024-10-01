@@ -1,8 +1,5 @@
 using System;
 using UnityEngine;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEngine.Serialization;
 
 public class EnemyFight : MonoBehaviour
 {
@@ -15,7 +12,6 @@ public class EnemyFight : MonoBehaviour
         if (collision.CompareTag(_playerTag))
         {
             OnEnemyFought?.Invoke(_healthDamage);
-            Destroy(gameObject);
         }
     }
 }

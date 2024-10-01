@@ -1,3 +1,5 @@
+using System;
+using Stats;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -9,7 +11,6 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject BRespawn;
     [SerializeField] private GameObject BNext;
     [SerializeField] private GameObject[] Diamonds = new GameObject[3];
-    [SerializeField] private EnemyFight enemyFight;
     
     private void Start()
     {
@@ -20,6 +21,16 @@ public class MenuController : MonoBehaviour
         Diamonds[0].SetActive(false);
         Diamonds[1].SetActive(false);
         Diamonds[2].SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        HealthCounter.OnPlayerHealthDecreased += Dead;
+    }
+
+    private void OnDisable()
+    {
+        HealthCounter.OnPlayerHealthDecreased -= Dead;
     }
 
     public void Pause()
@@ -46,14 +57,6 @@ public class MenuController : MonoBehaviour
         BMenu.SetActive(false);
         BNext.SetActive(false);
         Time.timeScale = 1;
-    }
-
-    public void Dead()
-    {
-        BRespawn.SetActive(true);
-        BMenu.SetActive(true);
-        BNext.SetActive(false);
-        Time.timeScale = 0;
     }
 
     public void Finish(int score)
@@ -89,4 +92,11 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     
+    private void Dead()
+    {
+        BRespawn.SetActive(true);
+        BMenu.SetActive(true);
+        BNext.SetActive(false);
+        Time.timeScale = 0;
+    }
 }
