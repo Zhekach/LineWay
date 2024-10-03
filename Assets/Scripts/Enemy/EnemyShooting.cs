@@ -1,13 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
    [SerializeField] private CircleCollider2D _collider;
-   [SerializeField] private EnemyBullet _bullet;
    [SerializeField] private string _playerTag = "Player";
+   
+   [SerializeField] private EnemyBullet _bullet;
 
    public bool test;
 
@@ -16,6 +14,8 @@ public class EnemyShooting : MonoBehaviour
       if (collision.CompareTag(_playerTag))
       {
          test = true;
+         Vector2 playerPosition = collision.gameObject.transform.position;
+         _bullet.Shoot(playerPosition);
       }
    }
 }
