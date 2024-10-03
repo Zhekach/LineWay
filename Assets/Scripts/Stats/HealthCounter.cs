@@ -7,9 +7,10 @@ namespace Stats
     public class HealthCounter : MonoBehaviour
     {
         public TMP_Text HealthText;
-        
+
         [SerializeField] private int _healthCount = 3;
-    
+        [SerializeField] private int _healthMaxCount = 5;
+
         public int HealthCount => _healthCount;
 
         public static Action OnPlayerHealthDecreased;
@@ -33,15 +34,21 @@ namespace Stats
 
         private void UpdateHealthCount(int healthDelta)
         {
-            if (_healthCount + healthDelta > 0)
+            var resultHealth = _healthCount + healthDelta;
+            if (resultHealth > 0 && 
+                resultHealth <= _healthMaxCount)
             {
-                _healthCount += healthDelta;
+                _healthCount = resultHealth;
             }
-            else
+            else if (resultHealth > _healthMaxCount)
+            {
+                _healthCount = _healthMaxCount;
+            }
+            else if (resultHealth <= 0)
             {
                 _healthCount = 0;
             }
-            
+
             UpdateText();
 
             if (healthDelta < 0)
@@ -49,7 +56,7 @@ namespace Stats
                 OnPlayerHealthDecreased?.Invoke();
             }
         }
-            
+
         private void UpdateText()
         {
             HealthText.text = _healthCount.ToString();
