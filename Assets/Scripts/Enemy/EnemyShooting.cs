@@ -8,8 +8,8 @@ public class EnemyShooting : MonoBehaviour
    [SerializeField] private EnemyBullet _bullet;
 
    public bool test;
-
-   private void OnTriggerEnter2D(Collider2D collision)
+   
+   private void OnTriggerStay2D(Collider2D collision)
    {
       if (collision.CompareTag(_playerTag))
       {
