@@ -6,10 +6,12 @@ public class EnemySpellBook : MonoBehaviour
 
     [SerializeField] private string _enemyTag = "Enemy";
     [SerializeField] private EnemyType _enemyType;
+
+    public bool IsActivated;
     
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag(_enemyTag))
+        if (collision.CompareTag(_enemyTag) && IsActivated)
         {
             EnemyReward enemyReward = collision.gameObject.GetComponent<EnemyReward>();
             enemyReward.HandleSpell(_enemyType);
