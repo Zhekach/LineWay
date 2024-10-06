@@ -8,16 +8,22 @@ using UnityEngine.UIElements;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private WayDrawer _wayDrawer;
+    [SerializeField] private Animator _animator;
     [SerializeField] private float _moveSpeed = 3f;
     private bool _isMoving;
     private Rigidbody2D _rb;
     private Vector3 _position;
 
+    private string _animatorWalkingName = "IsMooving";
+    private int _animatorWalkingID;
+    
     public bool IsMoving => _isMoving;
     
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animatorWalkingID = Animator.StringToHash(_animatorWalkingName);
+        //_animatorWalkingID = _animator.na 
     }
     private void FixedUpdate()
     {
@@ -51,10 +57,12 @@ public class PlayerMovement : MonoBehaviour
         _wayDrawer.ClearWayPoints();
         _wayDrawer.Line.positionCount = 0;
         _isMoving = false;
+        _animator.SetBool(_animatorWalkingID, false);
     }
 
     public void StartMove()
     {
         _isMoving = true;
+        _animator.SetBool(_animatorWalkingID, true);
     }
 }
