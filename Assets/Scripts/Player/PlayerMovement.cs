@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public bool Move;
     [SerializeField] private WayDrawer _wayDrawer;
     [SerializeField] private float _moveSpeed = 3f;
+    private bool _isMoving;
     private Rigidbody2D _rb;
     private Vector3 _position;
+
+    public bool IsMoving => _isMoving;
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
     }
     private void FixedUpdate()
     {
-        if(Move)
+        if(_isMoving)
         {
             if(_wayDrawer.Line.positionCount > 0)
             {
@@ -46,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
     {
         _wayDrawer.ClearWayPoints();
         _wayDrawer.Line.positionCount = 0;
-        Move = false;
+        _isMoving = false;
+    }
+
+    public void StartMove()
+    {
+        _isMoving = true;
     }
 }
