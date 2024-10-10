@@ -15,7 +15,8 @@ public class EnemySpellBook : MonoBehaviour
         {
             EnemyReward enemyReward = collision.gameObject.GetComponent<EnemyReward>();
             enemyReward.HandleSpell(_enemyType);
-            Destroy(gameObject);
+            IsActivated = false;
+            gameObject.SetActive(false);
         }
     }
 }
