@@ -70,10 +70,10 @@ public class Shop : MonoBehaviour
 
     public void BuyItem()
     {
-        if (PlayerPrefs.GetInt("coins") >= priceItem)
+        if (PlayerPrefs.GetInt("_coins") >= priceItem)
         {
             playerShopping.skins.Add(nameItem);
-            PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") - priceItem);
+            PlayerPrefs.SetInt("_coins", PlayerPrefs.GetInt("_coins") - priceItem);
             
             SaveShopping();
             LoadShopping();
@@ -89,6 +89,6 @@ public class Shop : MonoBehaviour
 
     public void RefreshCoins()
     {
-        coinText.text = PlayerPrefs.GetInt("coins", 0).ToString();
+        coinText.text = PlayerPrefs.GetInt("_coins", 0).ToString();
     }
 }

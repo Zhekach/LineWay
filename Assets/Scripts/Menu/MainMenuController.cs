@@ -28,7 +28,7 @@ public class MainMenuController : MonoBehaviour
       LvlButtons[i].GetComponent<lvlStars>().SetStars(PlayerPrefs.GetInt("lvlStars" + (i+1),0));
     }
 
-    coinText.text = PlayerPrefs.GetInt("coins", 0).ToString();
+    coinText.text = PlayerPrefs.GetInt("_coins", 0).ToString();
   }
   
   public void Level1Load()
