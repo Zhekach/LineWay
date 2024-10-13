@@ -9,9 +9,14 @@ public class Progress : MonoBehaviour
     public bool[] lvlIsOpened = new bool[2]; //Должно соответствовать количеству уровней 
     public int[] lvlStars = new int[2]; //Должно соответствовать количеству уровней 
     
-    [SerializeField] private Dictionary<EnemyType, int> EnemySpellBooks;
+    private static Progress Instance;
     
-    public static Progress Instance;
+    private Dictionary<EnemyType, int> _enemySpellBooks = new Dictionary<EnemyType, int>
+    {
+        { EnemyType.Zombie , 1},
+        { EnemyType.Warrior , 2},
+        { EnemyType.Wizard , 3}
+    };
 
     private void Awake()
     {
@@ -31,16 +36,16 @@ public class Progress : MonoBehaviour
 
     public int GetEnemySpellBookCount(EnemyType enemyType)
     {
-        return EnemySpellBooks[enemyType];
+        return _enemySpellBooks[enemyType];
     }
 
     public void UpdateEnemyBookCount(EnemyType enemyType, int deltaCount)
     {
-        EnemySpellBooks[enemyType] += deltaCount;
+        _enemySpellBooks[enemyType] += deltaCount;
 
-        if (EnemySpellBooks[enemyType] < 0)
+        if (_enemySpellBooks[enemyType] < 0)
         {
-            EnemySpellBooks[enemyType] = 0;
+            _enemySpellBooks[enemyType] = 0;
         }
     }
 }

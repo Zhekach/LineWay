@@ -8,10 +8,19 @@ public class EnemyReward : MonoBehaviour
     [SerializeField] private int _reward = 1;
     [SerializeField] private EnemyType _enemyType;
 
-    public void HandleSpell(EnemyType enemyType)
+    private void OnEnable()
+    {
+        EnemySpellBook.OnEnemySpellActivated += HandleSpell;
+    }
+    private void OnDisable()
+    {
+        EnemySpellBook.OnEnemySpellActivated -= HandleSpell;
+    }
+
+    public void HandleSpell(GameObject enemy, EnemyType enemyType)
     {
         Debug.Log("EnemyDetected");
-        if (enemyType == _enemyType)
+        if (enemy == gameObject && enemyType == _enemyType)
         {
             //TODO add reward
             Destroy(gameObject);

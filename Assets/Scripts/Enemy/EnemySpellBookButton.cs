@@ -12,17 +12,18 @@ public class EnemySpellBookButton : MonoBehaviour, IPointerDownHandler
     [SerializeField] private EnemySpellBook _spellBook;
     [SerializeField] private EnemyType _enemyType;
     [SerializeField] private TMP_Text _textCounter;
+    [SerializeField] private Button _button;
 
-    [FormerlySerializedAs("_isPressed")] [SerializeField] private bool _isActivated;
+    [SerializeField] private bool _isActivated;
 
     private Camera _cameraMain;
-    private int _chargesPerLevel = 2;
+    private int _chargesPerLevel = 1;
 
     private const string MultiplierChar = "x";
 
     private void Start()
     {
-        _textCounter.text = MultiplierChar + _progressController.GetEnemySpellBookCount(_enemyType);
+        UpdateInfo();
         _cameraMain = Camera.main;
     }
 
@@ -51,6 +52,9 @@ public class EnemySpellBookButton : MonoBehaviour, IPointerDownHandler
     {
         if (_progressController.GetEnemySpellBookCount(_enemyType) > 0 && _chargesPerLevel > 0)
         {
+            _chargesPerLevel--;
+            _progressController.UpdateEnemyBookCount(_enemyType, -1);
+            UpdateInfo();
             return true;
         }
 
@@ -70,5 +74,15 @@ public class EnemySpellBookButton : MonoBehaviour, IPointerDownHandler
     {
         _isActivated = false;
         _spellBook.IsActivated = true;
+    }
+
+    private void UpdateInfo()
+    {
+        _textCounter.text = MultiplierChar + _progressController.GetEnemySpellBookCount(_enemyType);
+
+        if (_chargesPerLevel <= 0 || _progressController.GetEnemySpellBookCount(_enemyType) <= 0)
+        {
+            _button.interactable = false;
+        }
     }
 }

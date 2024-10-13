@@ -8,16 +8,20 @@ public class EnemySpellBook : MonoBehaviour
     [SerializeField] private EnemyType _enemyType;
 
     public bool IsActivated;
+
+    public static Action<GameObject, EnemyType> OnEnemySpellActivated;
     
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag(_enemyTag) && IsActivated)
         {
-            EnemyReward enemyReward = collision.gameObject.GetComponent<EnemyReward>();
-            enemyReward.HandleSpell(_enemyType);
-            IsActivated = false;
-            gameObject.SetActive(false);
+            var enemy = collision.gameObject;
+            
+            OnEnemySpellActivated?.Invoke(enemy, _enemyType);
         }
+        
+        IsActivated = false;
+        gameObject.SetActive(false);
     }
 }
 
