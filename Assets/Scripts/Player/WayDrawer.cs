@@ -31,7 +31,7 @@ public class WayDrawer : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !_playerMovement.Move && !_isDrawn)
+        if (Input.GetMouseButtonDown(0) && !_playerMovement.IsMoving && !_isDrawn)
         {
             var mousePosition = Camera.main.ScreenToWorldPoint(
                     new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
@@ -73,11 +73,11 @@ public class WayDrawer : MonoBehaviour
                 _timer += Time.deltaTime;
             }
         }
-        if (Input.GetMouseButtonUp(0) && !_playerMovement.Move && _clickOnPlayer)
+        if (Input.GetMouseButtonUp(0) && !_playerMovement.IsMoving && _clickOnPlayer)
         {
             _clickOnPlayer = false;
             _wayIndex = 1;
-            _playerMovement.Move = true;
+            _playerMovement.StartMove();
         }
     }
     public void SetPositions(Vector3[] positions)

@@ -1,23 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public bool Move;
     [SerializeField] private WayDrawer _wayDrawer;
+    [SerializeField] private Animator _animator;
     [SerializeField] private float _moveSpeed = 3f;
+    private bool _isMoving;
     private Rigidbody2D _rb;
     private Vector3 _position;
+
+    private string _animatorWalkingName = "IsMooving";
+    private int _animatorWalkingID;
+    
+    public bool IsMoving => _isMoving;
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animatorWalkingID = Animator.StringToHash(_animatorWalkingName);
+        //_animatorWalkingID = _animator.na 
     }
     private void FixedUpdate()
     {
-        if(Move)
+        if(_isMoving)
         {
             if(_wayDrawer.Line.positionCount > 0)
             {
@@ -46,6 +56,13 @@ public class PlayerMovement : MonoBehaviour
     {
         _wayDrawer.ClearWayPoints();
         _wayDrawer.Line.positionCount = 0;
-        Move = false;
+        _isMoving = false;
+        _animator.SetBool(_animatorWalkingID, false);
+    }
+
+    public void StartMove()
+    {
+        _isMoving = true;
+        _animator.SetBool(_animatorWalkingID, true);
     }
 }
