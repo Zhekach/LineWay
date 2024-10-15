@@ -1,7 +1,6 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Stats
 {
@@ -12,6 +11,8 @@ namespace Stats
     
         [SerializeField] private int _value;
         [SerializeField] private TMP_Text _uiText;
+        public Image _shieldImage;
+        [SerializeField] private bool _isShieldActive;
 
         private const int ValueMaxCount = 5;
 
@@ -19,12 +20,14 @@ namespace Stats
         {
             HealthPotion.OnHealthCollected += IncreaseValue;
             EnemyFight.OnEnemyFought += DecreaseValue;
+            PlayerShieldBook.OnPlayerShieldActivated += ActivateShield;
         }
 
         private void OnDisable()
         {
             HealthPotion.OnHealthCollected -= IncreaseValue;
             EnemyFight.OnEnemyFought -= DecreaseValue;
+            PlayerShieldBook.OnPlayerShieldActivated -= ActivateShield;
         }
 
         void Start()
@@ -47,6 +50,13 @@ namespace Stats
 
         private void DecreaseValue(int decrease)
         {
+            if (_isShieldActive)
+            {
+                _isShieldActive = false;
+                UpdateValue();
+                return;
+            }
+            
             _value -= decrease;
 
             if (_value <= 0)
@@ -58,10 +68,17 @@ namespace Stats
             _menuController.Dead();
         }
 
+        private void ActivateShield()
+        {
+            _isShieldActive = true;
+            UpdateValue();
+        }
+
         private void UpdateValue()
         {
             _uiText.text = _value.ToString();
             _progressController.Health = _value;
+            _shieldImage.gameObject.SetActive(_isShieldActive);
         }
     }
 }

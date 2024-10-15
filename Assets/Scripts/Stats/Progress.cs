@@ -14,7 +14,8 @@ public class Progress : MonoBehaviour
     public readonly int lvlQuantity = 2; //Должно соответствовать количеству уровней
     
     private static Progress Instance;
-    
+
+    private int _playerShieldBookCount = 1;
     private Dictionary<EnemyType, int> _enemySpellBooks = new Dictionary<EnemyType, int>
     {
         { EnemyType.Zombie , 1},
@@ -36,6 +37,21 @@ public class Progress : MonoBehaviour
             Destroy(gameObject);
         }
         
+    }
+
+    public int GetPlayerShieldBookCount()
+    {
+        return _playerShieldBookCount;
+    }
+
+    public void UpdatePlayerShieldBookCount(int deltaCount)
+    {
+        _playerShieldBookCount += deltaCount;
+
+        if (_playerShieldBookCount < 0)
+        {
+            _playerShieldBookCount = 0;
+        }
     }
 
     public int GetEnemySpellBookCount(EnemyType enemyType)
