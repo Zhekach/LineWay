@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Stats;
 using UnityEngine;
 
 public class EnemyReward : MonoBehaviour
@@ -13,19 +14,34 @@ public class EnemyReward : MonoBehaviour
     private void OnEnable()
     {
         EnemySpellBook.OnEnemySpellActivated += HandleSpell;
+        HealthCounter.OnEnemyDestroyedByPlayer += HandlePlayerAttack;
     }
     private void OnDisable()
     {
         EnemySpellBook.OnEnemySpellActivated -= HandleSpell;
+        HealthCounter.OnEnemyDestroyedByPlayer -= HandlePlayerAttack;
     }
 
-    public void HandleSpell(GameObject enemy, EnemyType enemyType)
+    private void HandlePlayerAttack(GameObject enemy)
+    {
+        if (enemy == gameObject)
+        {
+            DestroyEnemy();
+        }
+    }
+    
+    private void HandleSpell(GameObject enemy, EnemyType enemyType)
     {
         Debug.Log("EnemyDetected");
         if (enemy == gameObject && enemyType == _enemyType)
         {
-            OnEnemyDefeated?.Invoke(_reward);
-            Destroy(gameObject);
+            DestroyEnemy();
         }
+    }
+
+    private void DestroyEnemy()
+    {
+        OnEnemyDefeated?.Invoke(_reward);
+        Destroy(gameObject);
     }
 }

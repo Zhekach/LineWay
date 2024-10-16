@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,8 @@ namespace Stats
         [SerializeField] private bool _isShieldActive;
 
         private const int ValueMaxCount = 5;
+
+        public static Action<GameObject> OnEnemyDestroyedByPlayer;
 
         private void OnEnable()
         {
@@ -48,10 +51,11 @@ namespace Stats
             UpdateValue();
         }
 
-        private void DecreaseValue(int decrease)
+        private void DecreaseValue(GameObject enemy, int decrease)
         {
             if (_isShieldActive)
             {
+                OnEnemyDestroyedByPlayer?.Invoke(enemy);
                 _isShieldActive = false;
                 UpdateValue();
                 return;
