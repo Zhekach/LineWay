@@ -7888,6 +7888,7 @@ MonoBehaviour:
   _progressController: {fileID: 700787351}
   _value: 0
   _uiText: {fileID: 1564092164}
+  _convertMoveToCoinsCoef: 0.5
 --- !u!1 &2068433379
 GameObject:
   m_ObjectHideFlags: 0

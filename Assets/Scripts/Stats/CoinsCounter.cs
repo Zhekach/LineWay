@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class CoinsCounter : MonoBehaviour
 {
@@ -11,6 +7,7 @@ public class CoinsCounter : MonoBehaviour
     
     [SerializeField] private int _value;
     [SerializeField] private TMP_Text _uiText;
+    [SerializeField] private float _convertMoveToCoinsCoef;
 
     private void Start()
     {
@@ -21,11 +18,13 @@ public class CoinsCounter : MonoBehaviour
     private void OnEnable()
     {
         EnemyReward.OnEnemyDefeated += IncreaseValue;
+        PlayerMovement.OnMoveStopped += ConvertMoveToCoins;
     }
 
     private void OnDisable()
     {
         EnemyReward.OnEnemyDefeated -= IncreaseValue;
+        PlayerMovement.OnMoveStopped -= ConvertMoveToCoins;
     }
 
     private void IncreaseValue(int increase)
@@ -44,5 +43,11 @@ public class CoinsCounter : MonoBehaviour
     {
         _uiText.text = _value.ToString();
         _progressController.Coins = _value;
+    }
+
+    private void ConvertMoveToCoins(int moveCount)
+    {
+        int reward = (int) (moveCount * _convertMoveToCoinsCoef);
+        IncreaseValue(reward);
     }
 }

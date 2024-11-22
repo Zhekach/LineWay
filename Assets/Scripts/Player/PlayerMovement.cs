@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
@@ -19,11 +16,12 @@ public class PlayerMovement : MonoBehaviour
     
     public bool IsMoving => _isMoving;
     
+    public static Action<int> OnMoveStopped;
+    
     private void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animatorWalkingID = Animator.StringToHash(_animatorWalkingName);
-        //_animatorWalkingID = _animator.na 
     }
     private void FixedUpdate()
     {
@@ -58,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         _wayDrawer.Line.positionCount = 0;
         _isMoving = false;
         _animator.SetBool(_animatorWalkingID, false);
+        OnMoveStopped?.Invoke(_wayDrawer.WayUnspent);
     }
 
     public void StartMove()
