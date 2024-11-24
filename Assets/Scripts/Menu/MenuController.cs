@@ -23,16 +23,6 @@ public class MenuController : MonoBehaviour
         Diamonds[2].SetActive(false);
     }
 
-    private void OnEnable()
-    {
-        HealthCounter.OnPlayerHealthDecreased += Dead;
-    }
-
-    private void OnDisable()
-    {
-        HealthCounter.OnPlayerHealthDecreased -= Dead;
-    }
-
     public void Pause()
     {
         BCont.SetActive(true);
@@ -92,7 +82,7 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     
-    private void Dead()
+    public void Dead()
     {
         BRespawn.SetActive(true);
         BMenu.SetActive(true);

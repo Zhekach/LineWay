@@ -1,65 +1,88 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Stats
 {
     public class HealthCounter : MonoBehaviour
     {
-        public TMP_Text HealthText;
+        [SerializeField] private Progress _progressController;
+        [SerializeField] private MenuController _menuController;
+    
+        [SerializeField] private int _value;
+        [SerializeField] private TMP_Text _uiText;
+        public Image _shieldImage;
+        [SerializeField] private bool _isShieldActive;
 
-        [SerializeField] private int _healthCount = 3;
-        [SerializeField] private int _healthMaxCount = 5;
+        private const int ValueMaxCount = 5;
 
-        public int HealthCount => _healthCount;
-
-        public static Action OnPlayerHealthDecreased;
+        public static Action<GameObject> OnEnemyDestroyedByPlayer;
 
         private void OnEnable()
         {
-            HealthPotion.OnHealthCollected += UpdateHealthCount;
-            EnemyFight.OnEnemyFought += UpdateHealthCount;
+            HealthPotion.OnHealthCollected += IncreaseValue;
+            EnemyFight.OnEnemyFought += DecreaseValue;
+            PlayerShieldBook.OnPlayerShieldActivated += ActivateShield;
         }
 
         private void OnDisable()
         {
-            HealthPotion.OnHealthCollected -= UpdateHealthCount;
-            EnemyFight.OnEnemyFought -= UpdateHealthCount;
+            HealthPotion.OnHealthCollected -= IncreaseValue;
+            EnemyFight.OnEnemyFought -= DecreaseValue;
+            PlayerShieldBook.OnPlayerShieldActivated -= ActivateShield;
         }
 
         void Start()
         {
-            UpdateText();
+            _value = _progressController.Health;
+            UpdateValue();
         }
 
-        private void UpdateHealthCount(int healthDelta)
+        private void IncreaseValue(int increase)
         {
-            var resultHealth = _healthCount + healthDelta;
-            if (resultHealth > 0 && 
-                resultHealth <= _healthMaxCount)
-            {
-                _healthCount = resultHealth;
-            }
-            else if (resultHealth > _healthMaxCount)
-            {
-                _healthCount = _healthMaxCount;
-            }
-            else if (resultHealth <= 0)
-            {
-                _healthCount = 0;
-            }
+            _value += increase;
 
-            UpdateText();
-
-            if (healthDelta < 0)
+            if (_value >= ValueMaxCount)
             {
-                OnPlayerHealthDecreased?.Invoke();
+                _value = ValueMaxCount;
             }
+            
+            UpdateValue();
         }
 
-        private void UpdateText()
+        private void DecreaseValue(GameObject enemy, int decrease)
         {
-            HealthText.text = _healthCount.ToString();
+            if (_isShieldActive)
+            {
+                OnEnemyDestroyedByPlayer?.Invoke(enemy);
+                _isShieldActive = false;
+                UpdateValue();
+                return;
+            }
+            
+            _value -= decrease;
+
+            if (_value <= 0)
+            {
+                _value = 0;
+            }
+            
+            UpdateValue();
+            _menuController.Dead();
+        }
+
+        private void ActivateShield()
+        {
+            _isShieldActive = true;
+            UpdateValue();
+        }
+
+        private void UpdateValue()
+        {
+            _uiText.text = _value.ToString();
+            _progressController.Health = _value;
+            _shieldImage.gameObject.SetActive(_isShieldActive);
         }
     }
 }

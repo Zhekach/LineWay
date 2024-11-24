@@ -1,16 +1,21 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Progress : MonoBehaviour
 {
-    public int coins;
-    public readonly int lvlQuantity = 2; //Должно соответствовать количеству уровней
+    public int Health;
+    public int Coins;
+    
     public bool[] lvlIsOpened = new bool[2]; //Должно соответствовать количеству уровней 
     public int[] lvlStars = new int[2]; //Должно соответствовать количеству уровней 
+    public readonly int lvlQuantity = 2; //Должно соответствовать количеству уровней
     
     private static Progress Instance;
-    
+
+    private int _playerShieldBookCount = 1;
     private Dictionary<EnemyType, int> _enemySpellBooks = new Dictionary<EnemyType, int>
     {
         { EnemyType.Zombie , 1},
@@ -32,6 +37,21 @@ public class Progress : MonoBehaviour
             Destroy(gameObject);
         }
         
+    }
+
+    public int GetPlayerShieldBookCount()
+    {
+        return _playerShieldBookCount;
+    }
+
+    public void UpdatePlayerShieldBookCount(int deltaCount)
+    {
+        _playerShieldBookCount += deltaCount;
+
+        if (_playerShieldBookCount < 0)
+        {
+            _playerShieldBookCount = 0;
+        }
     }
 
     public int GetEnemySpellBookCount(EnemyType enemyType)
