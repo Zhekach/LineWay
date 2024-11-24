@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Enemy_Zombi_walk
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 4
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 9e61ea381ea3165459ce063602930bb0, type: 3}
+    - {fileID: 2800000, guid: c6360af32f432f44793d3c7bde536378, type: 3}
+    - {fileID: 2800000, guid: e34f32f31c84896499bcac05dc89c4c9, type: 3}
+    - {fileID: 2800000, guid: 91ec08d7e20a5ff47a7cc83f45ffc8fe, type: 3}
+    - {fileID: 2800000, guid: 221c8bf07ef5ae44e91e95e84cb04042, type: 3}
+    - {fileID: 2800000, guid: dbb80c99fcdc2384aa8bb1c0f55cd18f, type: 3}
+    - {fileID: 2800000, guid: 5d06db6b9615b2448b5288a7e83eb10e, type: 3}
+    - {fileID: 2800000, guid: 89c23f630ef6e354bbe96097160d80e7, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 221c8bf07ef5ae44e91e95e84cb04042: 21300000
+    - 89c23f630ef6e354bbe96097160d80e7: 21300000
+    - e34f32f31c84896499bcac05dc89c4c9: 21300000
+    - c6360af32f432f44793d3c7bde536378: 21300000
+    - 91ec08d7e20a5ff47a7cc83f45ffc8fe: 21300000
+    - 9e61ea381ea3165459ce063602930bb0: 21300000
+    - dbb80c99fcdc2384aa8bb1c0f55cd18f: 21300000
+    - 5d06db6b9615b2448b5288a7e83eb10e: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 221c8bf07ef5ae44e91e95e84cb04042, type: 3}
+  - {fileID: 21300000, guid: 89c23f630ef6e354bbe96097160d80e7, type: 3}
+  - {fileID: 21300000, guid: e34f32f31c84896499bcac05dc89c4c9, type: 3}
+  - {fileID: 21300000, guid: c6360af32f432f44793d3c7bde536378, type: 3}
+  - {fileID: 21300000, guid: 91ec08d7e20a5ff47a7cc83f45ffc8fe, type: 3}
+  - {fileID: 21300000, guid: 9e61ea381ea3165459ce063602930bb0, type: 3}
+  - {fileID: 21300000, guid: dbb80c99fcdc2384aa8bb1c0f55cd18f, type: 3}
+  - {fileID: 21300000, guid: 5d06db6b9615b2448b5288a7e83eb10e, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Zombi_walk_05
+  - Zombi_walk_08
+  - Zombi_walk_03
+  - Zombi_walk_02
+  - Zombi_walk_04
+  - Zombi_walk_01
+  - Zombi_walk_06
+  - Zombi_walk_07
+  m_RenderDataMap: {}
+  m_Tag: Enemy_Zombi_walk
+  m_IsVariant: 0
