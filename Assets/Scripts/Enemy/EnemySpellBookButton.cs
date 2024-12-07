@@ -19,7 +19,7 @@ public class EnemySpellBookButton : MonoBehaviour, IPointerDownHandler
     private Camera _cameraMain;
     private int _chargesPerLevel = 1;
 
-    private const string MultiplierChar = "x";
+    private const string MultiplierChar = "x ";
 
     private void Start()
     {

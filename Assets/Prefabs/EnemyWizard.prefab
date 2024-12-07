@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7843708823679677585}
   - component: {fileID: 4206983150598930545}
   - component: {fileID: 8428799087547456686}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Shooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -197,7 +197,6 @@ MonoBehaviour:
   _isReady: 0
   _isMoving: 0
   _targetPosition: {x: 0, y: 0}
-  _lifeTime: 2
   _velocity: 2
 --- !u!50 &840428557783400712
 Rigidbody2D:
@@ -286,8 +285,11 @@ GameObject:
   - component: {fileID: 83880994663173534}
   - component: {fileID: 6053178895545893017}
   - component: {fileID: 3969401478849686556}
+  - component: {fileID: 5129864438390042995}
   - component: {fileID: 6941029642269284980}
   - component: {fileID: 4383737990611140595}
+  - component: {fileID: 1060583349495058593}
+  - component: {fileID: 3002970513499956138}
   m_Layer: 7
   m_Name: EnemyWizard
   m_TagString: Enemy
@@ -302,9 +304,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7838591226136162387}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0416666, y: 1.0980393, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7843708823679677585}
@@ -356,11 +358,11 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1795676313, guid: 8a8de0ad59435eb49b6d3a82086a2014, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d60e9069bede4c84aadd5298ed158790, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 1
+  m_DrawMode: 0
   m_Size: {x: 0.75, y: 1.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -375,6 +377,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7838591226136162387}
   m_CullTransparentMesh: 1
+--- !u!114 &5129864438390042995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838591226136162387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a1c4436c976e742bf8e6ca9879f430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _reward: 1
+  _enemyType: 0
 --- !u!114 &6941029642269284980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,7 +421,7 @@ CapsuleCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 1
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -424,3 +440,53 @@ CapsuleCollider2D:
   m_Offset: {x: -0.006185055, y: -0.006186247}
   m_Size: {x: 0.8613539, y: 1.2066073}
   m_Direction: 0
+--- !u!50 &1060583349495058593
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838591226136162387}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &3002970513499956138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7838591226136162387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006beb027fab52e48975b991d80a6d97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LocalizedAssetReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:469b684a777862f4199513f858df6192
+    m_TableEntryReference:
+      m_KeyId: 5904039936
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+  m_UpdateAsset:
+    m_PersistentCalls:
+      m_Calls: []
